@@ -1,0 +1,101 @@
+public class ListaDoble<T> {
+
+    private NodoDoble<T> pFirst;
+    private NodoDoble<T> pLast;
+    private int size;
+
+    public ListaDoble() {
+        this.pFirst = null;
+        this.pLast = null;
+        this.size = 0;
+
+    }
+
+    public boolean EsVacia() {
+        return this.pFirst == null;
+    }
+
+    public void AgregarInicio(T data) {
+        NodoDoble<T> nodo = new NodoDoble(data);
+        if (EsVacia()) {
+            pFirst = nodo;
+            pLast = nodo;
+        } else {
+            nodo.setpNext(pFirst);
+            pFirst = nodo;
+        }
+        size++;
+    }
+
+    public void AgregarFinal(T data) {
+        NodoDoble<T> nodo = new NodoDoble(data);
+        if (EsVacia()) {
+            pLast = nodo;
+            pFirst = nodo;
+        } else {
+            pLast.setpNext(nodo);
+            pLast = nodo;
+        }
+        size++;
+    }
+    
+    public void Imprimir(){
+        NodoDoble pAux = pFirst;
+        while(pAux != null){
+            System.out.println(pAux.getData());
+            pAux = pAux.getpNext();
+        }
+    }
+    
+    public NodoDoble BuscarIndice(int index){
+        NodoDoble pAux= pFirst;
+        int count = 0;
+        while(pAux != null && count != index){
+            pAux = pAux.getpNext();
+            count++;
+        }
+        
+        if(pAux != null){
+            return pAux;
+        } else{
+            return null;
+        }
+    }
+    
+    public T BuscarDataIndice(int index){
+        NodoDoble<T> pAux =this.BuscarIndice(index);
+        if (pAux != null){
+            return pAux.getData();
+        }else{
+        return null;
+        }
+        
+    }
+
+    public NodoDoble<T> getpFirst() {
+        return pFirst;
+    }
+
+    public void setpFirst(NodoDoble<T> pFirst) {
+        this.pFirst = pFirst;
+    }
+
+    public NodoDoble<T> getpLast() {
+        return pLast;
+    }
+
+    public void setpLast(NodoDoble<T> pLast) {
+        this.pLast = pLast;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+}
+    
+}
