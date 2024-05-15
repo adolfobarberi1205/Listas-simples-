@@ -1,0 +1,98 @@
+public class Lista_simple<T> {
+
+    private NodoSimple<T> pFirts;
+    private NodoSimple<T> pLast;
+    private int size;
+
+    public Lista_simple() {
+        this.pFirts = null;
+        this.pLast = null;
+        this.size = 0;
+    }
+
+    public boolean EsVacia() {
+        return this.pFirts == null;
+    }
+
+    public void AgregarInicio(T data) {
+        NodoSimple<T> nodo = new NodoSimple<>(data);
+        if (this.EsVacia()) {
+            pFirts = nodo;
+        } else {
+            nodo.setpNext(pFirts);
+            pFirts = nodo;
+        }
+        size++;
+    }
+
+    public void AgregarFinal(T data) {
+        NodoSimple<T> nodo = new NodoSimple<>(data);
+        if (this.EsVacia()) {
+            pFirts = nodo;
+            pLast = nodo;
+        } else {
+            pLast.setpNext(nodo);
+            pLast = nodo;
+        }
+        size++;
+    }
+
+    public void Imprimir() {
+        NodoSimple pAux = pFirts;
+
+        while (pAux != null) {
+            System.out.println(pAux.getData());
+            pAux = pAux.getpNext();
+        }
+    }
+    
+    public NodoSimple<T> BuscarIndice(int index){
+        NodoSimple<T> pAux = pFirts;
+        int count = 0;
+        while(pAux != null && count != index){
+            pAux = pFirts.getpNext();
+            count++;
+        }
+        if (pAux != null){
+            return pAux;
+        } else{
+        return null;
+        }
+    }
+    
+    public T DevolverDataIndice(int index){
+        NodoSimple<T> pAux = this.BuscarIndice(index);
+        if (pAux != null){
+            return pAux.getData();
+        } else {
+            return null;
+        }
+        
+    
+    }
+
+    public NodoSimple<T> getpFirts() {
+        return pFirts;
+    }
+
+    public void setpFirts(NodoSimple<T> pFirts) {
+        this.pFirts = pFirts;
+    }
+
+    public NodoSimple<T> getpLast() {
+        return pLast;
+    }
+
+    public void setpLast(NodoSimple<T> pLast) {
+        this.pLast = pLast;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+}
