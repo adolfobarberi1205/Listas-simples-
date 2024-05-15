@@ -1,0 +1,205 @@
+public class CList<T> {
+    Nodo<T> head;
+    Nodo<T> fin;
+    int size;
+
+    public CList() {
+        this.head = null;
+        this.fin = null;
+        this.size = 0;
+    }
+
+    public int getSize() {
+        return size;
+    }
+    
+    public void addFirst(T data) {
+        Nodo<T> newNode = new Nodo<>(data);
+        
+        if (head == null) {
+            head = newNode;
+            fin = newNode;
+            fin.next = head;
+        }else {
+            newNode.next = head;
+            fin.next = newNode;
+            head = newNode;
+        }
+        size++;
+    }
+    
+    public void addEnd(T data) {
+        Nodo<T> newNode = new Nodo<>(data);
+        if (head == null) {
+            head = newNode;
+            fin = newNode;
+            fin.next = head;
+        }else {
+            fin.next = newNode;
+            fin = newNode;
+            fin.next = head;
+        }
+        size++;
+    }
+
+    public void addIndex(T data, int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Nodo<T> newNode = new Nodo<>(data);
+        if (index == 0) {
+            addFirst(data);
+        } else if (index == size) {
+            addEnd(data);
+        } else {
+            Nodo<T> aux = head;
+            for (int i = 0; i < index - 1; i++) {
+                aux = aux.next;
+            }
+            newNode.next = aux.next;
+            aux.next = newNode;
+            size++;
+        }
+    }
+
+    public void removeIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index == 0) {
+            head = head.next;
+        } else {
+            Nodo<T> aux = head;
+            for (int i = 0; i < index - 1; i++) {
+                aux = aux.next;
+            }
+            aux.next = aux.next.next;
+        }
+        size--;
+    }
+
+    public int length() {
+        Nodo<T> aux = head;
+        int count = 0;
+        if (head != null) {
+            do {
+                count++;
+                aux = aux.next;
+            } while (aux != head);
+        }
+        return count;
+    }
+    
+    public void remove(T data) {
+        if (head == null) {
+            return;
+        }
+        if (head.data.equals(data)) {  //ve si es el head el que hay que remove
+            Nodo<T> aux = head;
+            while (aux.next != head) {                
+                aux = aux.next;
+            }
+            head = head.next;
+            aux.next = head;
+            size--;
+            return;
+        }
+        Nodo<T> prevNode = null;
+        Nodo<T> temp = head;
+        while (temp.next != head) {            
+            if (temp.data.equals(data)) { //ve si hay el nodo que hay que remove esta entre el head y el ultimo nodo
+                prevNode.next = temp.next;
+                size--;
+                return;
+            }
+            prevNode = temp;
+            temp = temp.next;
+        }
+        if (temp.data.equals(data)) { //ve si el ultimo nodo es el que hay que remover
+            prevNode.next = temp.next;
+            size--;
+        }
+    }
+
+    public boolean contains(T data) {
+        Nodo<T> aux = head;
+        while (aux != null) {
+            if (aux.data.equals(data)) {
+                return true;
+            }
+            aux = aux.next;
+        }
+        return false;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+    
+    public void clear() {
+        head = null;
+        size = 0;
+    }
+
+    public int search(T data) {
+        Nodo<T> aux = head;
+        int count = 0;
+        while (aux.next != head) {            
+            if (aux.data.equals(data)) {
+                return count;
+            }
+            aux = aux.next;
+            count++;
+        }
+        return -1;
+    }
+
+    public boolean hasCycle() {
+        if (head == null) {
+            return false;
+        }
+
+        Nodo<T> slow = head;
+        Nodo<T> fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    public String CPrint() {
+        Nodo<T> aux = head;
+        String result = "";
+        if (aux == null) {
+            return result;
+        }
+        while (aux.next != head) {            
+            result += aux.data;
+            if (aux.next != head) {
+                result += "-";
+            }
+            aux = aux.next;
+        }if (aux.next == head) {
+            result += aux.data;
+        }
+        return result;
+    }
+
+    public void print() {
+        Nodo<T> aux = head;
+        do {
+            System.out.println(aux.data);
+            aux = aux.next;
+            if (aux == head) {
+                aux = null;
+            }
+        } while (aux != null);
+    }
+}
