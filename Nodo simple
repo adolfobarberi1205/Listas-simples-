@@ -1,0 +1,27 @@
+ * @param <T>
+ */
+public class NodoSimple<T>{
+    private NodoSimple<T> pNext;
+    private T data;
+    
+    public NodoSimple(T data){
+        this.data = data;
+        this.pNext = null;
+    }
+
+    public NodoSimple<T> getpNext() {
+        return pNext;
+    }
+
+    public void setpNext(NodoSimple<T> pNext) {
+        this.pNext = pNext;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+}
