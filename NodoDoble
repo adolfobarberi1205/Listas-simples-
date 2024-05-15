@@ -1,0 +1,39 @@
+public class NodoDoble<T> {
+    private NodoDoble<T> pNext;
+    private NodoDoble<T> pPrev;
+    private T data;
+
+    public  NodoDoble(T data){
+        this.pNext = null;
+        this.pPrev = null;
+        this.data = data;
+    }
+    
+    
+
+    public NodoDoble<T> getpNext() {
+        return pNext;
+    }
+
+    public void setpNext(NodoDoble<T> pNext) {
+        this.pNext = pNext;
+    }
+
+    public NodoDoble<T> getpPrev() {
+        return pPrev;
+    }
+
+    public void setpLast(NodoDoble<T> pPrev) {
+        this.pPrev = pPrev;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+    
+   
+}
